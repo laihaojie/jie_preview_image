@@ -11,29 +11,26 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages).
 -->
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
-
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+- Show a single image or a swipeable list of images
 
 ## Getting started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+```sh
+flutter pub add jie_preview_image
+```
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
-
 ```dart
-const like = 'sample';
+previewImage(context, urls:[url1, url2, url3]);
 ```
 
-## Additional information
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+Import it
+Now in your Dart code, you can use:
+  
+```dart
+import 'package:jie_preview_image/jie_preview_image.dart';
+```

@@ -28,41 +28,60 @@ class PreviewImageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return urls.isEmpty
-        ? GestureDetector(
-            onTap: () => Navigator.pop(context),
-            child: Material(
-              child: Container(
-                color: Colors.white,
-                child: const Center(
-                  child: Text(
-                    '图片不存在',
-                    style: TextStyle(color: Colors.black),
-                  ),
-                ),
-              ),
-            ),
-          )
-        : PageView(
-            pageSnapping: true, // 是否自动贴合边界
-            controller: currentUrl == null
-                ? null
-                : PageController(
-                    initialPage: urls.indexOf(currentUrl!),
-                  ),
-            children: [
-              for (int i = 0; i < urls.length; i++)
-                GestureDetector(
-                  onTap: () => Navigator.pop(context),
-                  child: InteractiveViewer(
-                    maxScale: 3,
-                    child: Image.network(
-                      urls[i],
-                      fit: BoxFit.fitWidth,
+    return Container(
+      color: Colors.black,
+      child: urls.isEmpty
+          ? GestureDetector(
+              onTap: () => Navigator.pop(context),
+              child: Material(
+                child: Container(
+                  color: Colors.white,
+                  child: const Center(
+                    child: Text(
+                      '图片不存在',
+                      style: TextStyle(color: Colors.black),
                     ),
                   ),
                 ),
-            ],
-          );
+              ),
+            )
+          : PageView(
+              pageSnapping: true, // 是否自动贴合边界
+              controller: currentUrl == null
+                  ? null
+                  : PageController(
+                      initialPage: urls.indexOf(currentUrl!),
+                    ),
+              children: [
+                for (int i = 0; i < urls.length; i++)
+                  GestureDetector(
+                    onTap: () => Navigator.pop(context),
+                    child: InteractiveViewer(
+                      maxScale: 5,
+                      child: Image.network(
+                        urls[i],
+                        fit: BoxFit.fitWidth,
+                        loadingBuilder: (
+                          context,
+                          child,
+                          loadingProgress,
+                        ) {
+                          if (loadingProgress == null) return child;
+
+                          return Center(
+                            child: CircularProgressIndicator(
+                              value: loadingProgress.expectedTotalBytes != null
+                                  ? loadingProgress.cumulativeBytesLoaded /
+                                      loadingProgress.expectedTotalBytes!
+                                  : null,
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+              ],
+            ),
+    );
   }
 }

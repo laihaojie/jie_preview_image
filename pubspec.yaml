@@ -1,10 +1,10 @@
 name: jie_preview_image
-description: A new Flutter package project.
-version: 0.0.1
-homepage:
+description: flutter image preview
+version: 1.0.0
+homepage: https://github.com/laihaojie/jie_preview_image
 
 environment:
-  sdk: '>=2.18.2 <3.0.0'
+  sdk: ">=2.18.2 <3.0.0"
   flutter: ">=1.17.0"
 
 dependencies:
