@@ -58,25 +58,38 @@ class PreviewImageWidget extends StatelessWidget {
                     onTap: () => Navigator.pop(context),
                     child: InteractiveViewer(
                       maxScale: 5,
-                      child: Image.network(
-                        urls[i],
-                        fit: BoxFit.fitWidth,
-                        loadingBuilder: (
-                          context,
-                          child,
-                          loadingProgress,
-                        ) {
-                          if (loadingProgress == null) return child;
+                      child: Hero(
+                        tag: urls[i],
+                        // 判断是否是网络图片
+                        child: urls[i].startsWith('http')
+                            ? Image.network(
+                                urls[i],
+                                fit: BoxFit.fitWidth,
+                                loadingBuilder: (
+                                  context,
+                                  child,
+                                  loadingProgress,
+                                ) {
+                                  if (loadingProgress == null) return child;
 
-                          return Center(
-                            child: CircularProgressIndicator(
-                              value: loadingProgress.expectedTotalBytes != null
-                                  ? loadingProgress.cumulativeBytesLoaded /
-                                      loadingProgress.expectedTotalBytes!
-                                  : null,
-                            ),
-                          );
-                        },
+                                  return Center(
+                                    child: CircularProgressIndicator(
+                                      value:
+                                          loadingProgress.expectedTotalBytes !=
+                                                  null
+                                              ? loadingProgress
+                                                      .cumulativeBytesLoaded /
+                                                  loadingProgress
+                                                      .expectedTotalBytes!
+                                              : null,
+                                    ),
+                                  );
+                                },
+                              )
+                            : Image.asset(
+                                urls[i],
+                                fit: BoxFit.fitWidth,
+                              ),
                       ),
                     ),
                   ),

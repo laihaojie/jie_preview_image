@@ -46,17 +46,21 @@ class _MyHomePageState extends State<MyHomePage> {
                 previewImage(
                   context,
                   currentUrl:
-                      'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
+                      'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
                   urls: [
                     'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
                     'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
                   ],
                 );
               },
-              child: Image.network(
-                'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
-                width: 100,
-                height: 100,
+              child: Hero(
+                tag:
+                    'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
+                child: Image.network(
+                  'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
+                  width: 100,
+                  height: 100,
+                ),
               ),
             )
           ],
